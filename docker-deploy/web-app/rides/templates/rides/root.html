@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridol~</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'rides/index.css' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="topnav navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Ridol~</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <button  class="btn btn-outline-secondary" value = "Home" id = "home_button"onclick=gohomepage();><i class="bi bi-house-fill"></i> Home</button>
+              </li>   
+              {% if user.is_authenticated %}
+          
+            <li class=" navbar-nav " >  
+              <button  class="btn btn-outline-success" value = "driverregister_button" id = "driverregister_button"onclick=godriverregister();><i class="bi bi-person-vcard-fill"></i>  Driver Register</button>
+               </li>   
+          {% endif %}  
+            </ul>
+            
+            {% if user.is_authenticated %}
+              <li class=" navbar-nav pad15" >  
+                <button  class="btn btn-success" value = "history_button" id = "history_button"onclick=goorderhistory();><i class="bi bi-calendar2-check"></i> History</button>
+              </li>   
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <li class="navbar-nav dropdown" >        
+              <button class="btn btn-secondary dropdown-toggle" type="button" value = "Open Order" id="openorder_button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="bi bi-clipboard-pulse"></i> Open Order</button>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" onclick=goorderinprocess();><i class="bi bi-person-fill"></i> Ride Owner Order</a>
+                      <a class="dropdown-item" onclick=goshareorderinprocess();><i class="bi bi-people-fill"></i> Ride Sharer Order</a>
+                      </div>	
+               
+          {% endif %}
+          
+          {% if user.is_authenticated %}
+          
+            <li class=" navbar-nav pad15" >  
+              <button  class="btn btn-outline-primary" value = "gostartaride_button" id = "gostartaride_button"onclick=gostartaride();>Start Ride</button>
+               </li>   
+          {% endif %}
+          {% if user.is_authenticated %}
+              <li class=" navbar-nav"  >  
+                <button   class="btn btn-outline-primary" value = "godrivemode" onclick=godrivemode();><i class="bi bi-car-front-fill"></i> Driver Mode</button>
+              </li>
+              {% else %}
+              <li class="navbar-nav" >  
+                <input type="button" class="btn btn-success" id = "register_button" value = "Register" onclick=goregpage();>
+              </li>  
+            {% endif %}
+        <li class="navbar-nav pad15 dropdown" >        
+            <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+                {% if user.is_authenticated %}
+                <i class="bi bi-person-fill"></i>{{user.username}}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" onclick=gouserinfo();>Personal Information</a>
+                    <a class="dropdown-item" onclick=gopassinfo();>Change Password</a>
+                    <a class="dropdown-item" onclick=goorderhistory();>Order History</a>
+                    <a class="dropdown-item" onclick=goorderinprocess();>Order in Progress</a>
+                    <a class="dropdown-item" onclick=gologoutpage();>Logout</a>
+                    </div>	
+                {% else %}
+                  Find More Funs!
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="https://news.google.com/home?hl=en-US&gl=US&ceid=US:en">News</a>
+                  </div>
+                {% endif %}
+            
+          </li>
+          <li class="navbar-nav" >  
+            {% if user.is_authenticated %}
+                <input type="button" class="btn btn-primary " id = "register_button" value = "Logout" onclick="gologoutpage()";>
+             {% else %}
+                <input type="button" class="btn btn-primary" id = "register_button" value = "Login" onclick="gologinpage()";>
+             {% endif %}
+            </li>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}" style = 'width:155%'>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% if message %}
+              <div class="alert alert-{{ message.tags }}" style = 'color:red; width:155%'>
+                {{ message }}
+              </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="container text-center">
+    {% block content %}
+    {% endblock %}
+     </div>
+    <script>
+      
+      function godriverregister(){
+          window.location.href = "{% url 'DriverRegister' %}";
+        }
+        function gouserinfo(){
+          window.location.href = "{% url 'UserInfo' %}";
+        }
+        function gopassinfo(){
+          window.location.href = "{% url 'PassInfo' %}";
+        }
+        function godrivemode(){
+          window.location.href = "{% url 'DriverHome' %}";
+        }
+        function gohomepage() {
+          window.location.href = "{% url 'Home' %}";
+        }
+        function gologinpage() {
+          window.location.href = "{% url 'UserLogin' %}";
+        }
+        function gologoutpage() {
+          window.location.href = "{% url 'UserLogout' %}";
+        }      
+        function goregpage() {
+          window.location.href = "{% url 'UserRegister' %}";
+        }
+        function goorderhistory() {
+            window.location.href = "{% url 'OrderHistory' %}";
+        }
+        function goorderinprocess() {
+          window.location.href = "{% url 'OrderInProcess' %}";
+        }
+        function gostartaride() {
+            window.location.href = "{% url 'RideHome' %}";
+        }  
+        function goshareorderinprocess() {
+            window.location.href = "{% url 'SharerNowList' %}";
+        }  
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
+

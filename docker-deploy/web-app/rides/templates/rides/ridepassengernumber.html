@@ -1,0 +1,44 @@
+{% extends 'rides/root.html'%}
+{% block content%}
+    <div class="container pad30" align = "left">            
+        <div class="padboth10" align="center" >
+            <div align="left" >              
+                <button class="btn btn-primary" data-bs-toggle="collapse" href="#coride" ><i class="bi bi-car-front-fill"></i> View Shared Ride Passenger Information</button>       
+                <div class="pad15 show" id="coride"style="width: 100%;"> 
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Role</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Passenger Num</th>                                              
+                          </tr>                                                 
+                        </thead>
+                        <tbody>          
+                          <tr>
+                            <td>Ride Owner</td>
+                            <td>{{ owner_order.rider.username}}</td>
+                            <td>{{ owner_order.tol_passengers }}</td>              
+                          </tr>
+                          {% for obj in sharers %}
+                          <tr>
+                            <td>Ride Sharer</td>
+                            <td>{{ obj.sharer.username}}</td>
+                            <td>{{ obj.sha_tol_passengers }}</td>              
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>  
+            </div>  
+        </div>                        
+    </div>     
+    <div align="right" >  
+      <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.GET.next }}">
+          <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-arrow-return-left"></i> Go Back</button>
+      </form>                          
+  </div>     
+
+</div> 
+{%endblock%}

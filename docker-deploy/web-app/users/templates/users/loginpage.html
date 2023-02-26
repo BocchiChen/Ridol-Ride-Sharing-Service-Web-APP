@@ -1,0 +1,24 @@
+{% extends "rides/root.html" %}
+{% block content %}
+  <div class="container" align = "center">    
+    <h3 class = "card-title pad30" align = "center">Welcome to Ridol~, We Change Lifes</h3>    
+    <div class="card padboth10"  align="center" style="width: 40%;">       
+      <div class = "card-body">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="padboth15" align="left">
+            <label for="username" class="form-label">Username</label>
+            <input type="textarea" class="form-control" name ="username" id="username">
+          </div>
+          <div class="padboth15" align="left">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name ="password" id="password">
+          </div>
+            <div class="padboth15" align = "center">
+            <input type="submit"  class="btn btn-primary col-5" name="signin_button" id = "signin_button" value = "Sign in";>
+          </div>                     
+        </form>
+      </div> 
+    </div>
+  </div>
+{% endblock content %}

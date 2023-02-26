@@ -1,0 +1,51 @@
+{% extends 'rides/drivertemplate.html'%}
+{% block content%}
+<!--open ride information-->
+<div class="container pad30" align = "left">            
+    <div class="padboth10" width = "800" align="center" >
+        <div align="left" >              
+            <button class="btn btn-primary" data-bs-toggle="collapse" href="#comfirmedorderlist"  ><i class="bi bi-building-check"></i> View Comfirmed Orders</button>       
+            <div class="pad15 show" id="comfirmedorderlist">       
+                <table class="table">
+                    <thead>
+                      <tr align="center">
+                        <th scope="col">Ride Owner Username</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Arrival Date</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Driver Username</th>
+                        <th scope="col">Passenger Number</th>
+                        <th scope="col">Vehicle Type</th>
+                        <th scope="col">Shared</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Special Requests</th> 
+                        <th scope="col">Complete</th>   
+                        <th scope="col">Detail</th>                 
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in comfirmed_order %}     
+                          <tr align="center">
+                            <td>{{ obj.rider.username }}</td>
+                            <td>{{ obj.destination }}</td>
+                            <td>{{ obj.arrival_date }}</td>
+                            <td>{{ obj.arrival_time }}</td>
+                            <td>{{ obj.driver.driver.username }}</td>
+                            <td><a href="{% url 'RenderDriverPassengersInfo' obj.id %}?next={{ request.path|urlencode }}">{{ obj.tol_passenger_num }}</a></td>
+                            <td>{{ obj.vehicle_type }}</td>
+                            <td>{{ obj.shared }}</td>
+                            <td>{{ obj.status }}</td>
+                            <td>{{ obj.special_reqs }}</td>
+                            <td><a class="btn btn-outline-danger" href="{% url 'DriverCompleteProcess' obj.id %}">Complete</a><!--change-->
+                            <td><a class="btn btn-outline-info" href="{% url 'OrderDetail' obj.id  %}?next={{ request.path|urlencode }}">Detail</a>               
+                    
+                            </tr>             
+                          {% endfor %}
+                    </tbody>
+                  </table>
+            </div>  
+        </div>  
+    </div>                        
+</div>     
+
+{%endblock%}

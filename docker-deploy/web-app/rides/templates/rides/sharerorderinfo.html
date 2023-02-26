@@ -1,0 +1,58 @@
+{% extends 'rides/root.html'%}
+  {% block content%}
+<div class = "pad30 container">
+<div class = "row center" align = "center">
+<form method="POST" novalidate>
+    {% csrf_token %}
+
+  <div class="container {{collapse2}} " id="searchshareride" >   
+      <div class="card padboth10"  align="center" style="width: 75%;">   
+        <div class = "card-heading">
+            <h3 class = "card-title" align = "center">Ride Share Order Information</h3>
+          </div>
+        <div class="row padboth15" align="left">
+            <div class="col-md-6 ">
+                <label for="sha_destination " class="form-label">Destination: </label>
+                <input type="text" class="form-control" name ="sha_destination" id="sha_destination" value = "{{form.sha_destination}}" disabled>
+         </div>
+            <div class="col-md-6 ">
+                <label for="sha_tol_passengers " class="form-label">Total Passenger Number: </label>
+                <input type="number" class="form-control" name ="sha_tol_passengers" id="sha_tol_passengers" value = "{{form.sha_tol_passengers}}" >
+           </div>
+        </div>
+           
+        <div class="row padboth15" align="left">
+            <div class="col-md-6">
+              <label for="earliest_arrival_date" class="form-label">Earliest Arrival Date: </label>
+              <input type="text" class="form-control" name ="earliest_arrival_date" id="earliest_arrival_date" value = "{{form.earliest_arrival_date}}" disabled >
+            </div>
+            <div class="col-md-6">
+                <label for="earliest_arrival_time" class="form-label">Earliest Arrival Time: </label>
+                <input type="text" class="form-control" name ="earliest_arrival_time" id="earliest_arrival_time" value = "{{form.earliest_arrival_time}}" disabled>
+            </div>
+        </div>
+          <div class="row padboth15" align="left">
+            <div class="col-md-6">
+              <label for="latest_arrival_date" class="form-label">Latest Arrival Date: </label>
+              <input type="text" class="form-control" name ="latest_arrival_date" id="latest_arrival_date" value = "{{form.latest_arrival_date}}" disabled >
+            </div>
+            <div class="col-md-6">
+                <label for="latest_arrival_time" class="form-label">Latest Arrival Time: </label>
+                <input type="text" class="form-control" name ="latest_arrival_time" id="latest_arrival_time" value = "{{form.latest_arrival_time}}" disabled>
+              </div>
+          </div>
+          <div class="row padboth15" align="center">
+            <div class="col-md-6">
+                <button type="button"   class="btn btn-outline-danger col-8" onclick="goshareorderinprocess()" >Cancel</button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-outline-primary col-8" name = "searchsharebutton" >Comfirm</button>
+            </div>
+          </div>                    
+      </div>                               
+  </div>  
+      </form>
+    </div>
+  </div>
+ 
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'rides/sharetemplate.html'%}
+
+{% block content%}
+<!--open ride information--> 
+    <div class="pad30" align = "left">            
+        <div class="padboth10" width = "800" align="center" >
+            <div align="left" >              
+                <button class="btn btn-primary" data-bs-toggle="collapse" href="#confirmride" ><i class="bi bi-car-front-fill"></i> Search Open Orders</button>       
+                <div class="pad15 card-body show" width = "800px" id="confirmride">     
+                    <table class="table">
+                        <thead>
+                          <tr align="center">
+                            <th scope="col">Destination</th>
+                            <th scope="col">Arrival Date</th>
+                            <th scope="col">Arrival Time</th>
+                          <th scope="col">Passenger Number</th>                          
+                            <th scope="col">Vehicle Type</th>                         
+                            <th scope="col">Status</th>    
+                            <th scope="col">Spectial Request</th> 
+                            <th scope="col">Comfirm</th>                      
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for obj in open_order %}      
+                          <tr align="center">
+                            <td>{{ obj.destination }}</td>
+                            <td>{{ obj.arrival_date }}</td>
+                            <td>{{ obj.arrival_time }}</td>
+                            <td>{{ obj.tol_passengers }}</td>
+                            <td>{{ obj.vehicle_type }}</td>
+                            <td>{{ obj.status }}</td>
+                            <td>{{ obj.special_reqs }}</td>
+                            <td><a class="btn btn-outline-success" href="{% url 'DriverConfirmProcess' obj.id %}">Comfirm</a><!--change-->
+                          </tr>             
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>  
+            </div>  
+        </div>                        
+    </div>     
+
+</div> 
+{%endblock%}
+

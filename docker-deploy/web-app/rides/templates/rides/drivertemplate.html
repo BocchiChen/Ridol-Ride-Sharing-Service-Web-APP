@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridol~</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'rides/index.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="topnav navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Ridol~</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <input type="button" class="btn btn-outline-secondary" id = "home_button" value = "Home" onclick="gohomepage()";>
+              </li>     
+            </ul>
+            
+            {% if user.is_authenticated %}
+              <li class=" navbar-nav" >  
+                <input type="button" class="btn btn-secondary" id = "completeorder_button" value = "Completed Orders" onclick=gocompleteorder();>
+              </li>   
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="pad15 navbar-nav" >  
+              <input type="button" class="btn btn-success" id = "comfirmedorder" value = "Comfirmed Orders" onclick=gocomfirmedorder();>
+            </li>   
+          {% endif %}
+          {% if user.is_authenticated %}
+            <li class=" navbar-nav" >  
+              <button type="button"   class="btn btn-success" value = "searchorder" onclick=goridermode();> Search <i class="bi bi-calendar3-range"></i> </button>
+            </li>   
+          {% endif %}
+          {% if user.is_authenticated %}
+              <li class="pad15 navbar-nav"  >  
+                <button type="button"   class="btn btn-outline-light" value = "goridermode" onclick=gostartaride();><i class="bi bi-people-fill"></i> Rider Mode</button>
+              </li>
+            {% endif %}
+        <li class=" navbar-nav dropdown " >        
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+                {% if user.is_authenticated %}
+                  {{user.username}}
+                {% else %}
+                  Find More Funs!
+                {% endif %}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" onclick=gouserinfo();>Personal Information</a>
+              <a class="dropdown-item" onclick=gopassinfo();>Change Password</a>
+              <a class="dropdown-item" onclick=goorderhistory();>Order History</a>
+              <a class="dropdown-item" onclick=goorderinprocess();>Order in Progress</a>
+              <a class="dropdown-item" onclick=gologoutpage();>Logout</a>
+            </div>	
+          </li>
+          <li class="pad15 navbar-nav " >  
+            {% if user.is_authenticated %}
+                <input type="button" class="btn btn-primary" id = "register_button" value = "Logout" onclick="gologoutpage()";>
+             {% else %}
+                <input type="button" class="btn btn-primary" id = "register_button" value = "Login" onclick="gologinpage()";>
+             {% endif %}
+            </li>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}" style = 'width:155%;'>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% if message %}
+              <div class="alert alert-{{ message.tags }}" style = 'color:red;width:155%;'>
+                {{ message }}
+              </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="container text-center">
+    {% block content %}
+    {% endblock %}
+     </div>
+    <script>
+      function gouserinfo(){
+          window.location.href = "{% url 'UserInfo' %}";
+        }
+        function gopassinfo(){
+          window.location.href = "{% url 'PassInfo' %}";
+        }
+        function goridermode(){
+          window.location.href = "{% url 'DriverHome' %}";
+        }
+        function gohomepage() {
+          window.location.href = "{% url 'Home' %}";
+        }
+        function gologinpage() {
+          window.location.href = "{% url 'UserLogin' %}";
+        }
+        function gologoutpage() {
+          window.location.href = "{% url 'UserLogout' %}";
+        }      
+        function goregpage() {
+          window.location.href = "{% url 'UserRegister' %}";
+        }
+        function goorderhistory() {
+            window.location.href = "{% url 'OrderHistory' %}";
+        }
+        function gocomfirmedorder() {
+          window.location.href = "{% url 'DriverComfirmed' %}";
+        }
+        function gostartaride() {
+            window.location.href = "{% url 'RideHome' %}";
+        }
+        function gocompleteorder() {
+            window.location.href = "{% url 'CompleteOrder' %}";
+        }
+  
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+1. Ride owner is not allowed to join his/her open rides. 
+Notes: This step was impelmented by simply excluding the user while using filter. 
+
+2. User cannot login the account if username or password is not correct.
+Notes: Simply using request.POST to get the user's inputs and using auth.authenticate to check whether the username and password matched any user data in database.
+If the username and password were correct, using auth.login to let user login his/her account. Else, popping out the error messages to warn the user. 
+
+2. User information and more activities can be viewed and accessed once a user logins his account.
+Notes: We finished it by adding if statements with user.is_authenticated in html files. 
+
+3. Driver should only view the open rides that exactly fits his/her vehicle type and special information. 
+Notes: We initially finished it by showing all the open rides to driver while prompting warning messages to driver if he/she wants to confirm a open ride that does not match his/her information.
+Finally, we solved it by adding more limitations to filter data in database by using django orm. 
+
+4. Driver cannot pick the ride that he/she has joined before. 
+Notes: We filtered all the open ride orders. Then, we iteratively checked whether any ride share of the ride order contained driver's username as username was unique in our system. 
+Excluding all the orders that did not comply with the conditions and saving the available orders in a list. Sending the list to the html files in views.py. 
+
+5. If driver has not finished his/her driver profile yet, he/she must finish it before switching to the driver mode (confirm any open ride). 
+Notes: We did some profile checking before user could tried to access any method that was related to driver. 
+
+6. While registering as a user or a driver, the system should check user's inputs before saving to the database.
+Notes: This step was implemented by using a form and set some restrictions on user's inputs. If any restrictions was violated, the error messages were sent to the html file. 
+
+7. Sharer cannot join the ride he/she has joined before. 
+Notes: Same as step 4, we iteratively checked whether any ride share of the ride order contained driver's username as username was unique in our system. 
+
+8. Sharer is able to change the passenger number of his/her party. 
+Notes: We set another variables in the RideOwner model to record the total passenger number of the ride. Changing the passenger number of any party will lead to an update of this variable. 
+
+9. Ride owner is allowed to check any update of his/her rides. 
+Notes: Ride owner could click the references below the passenger number or click the detail button to view all the ride sharers that had joined the order. Same as ride sharers.
+
+10. Driver cannot change his/her driver profile if he/she has any confirmed rides. 
+Notes: We solved it by adding a detector before driver tried to change his/her driver profile. We filtered confirmed rides by using the driver's id and checked whether it was zero. 
+If it was zero, the driver could update his/her driver profile successfully. If it was not, the driver could only update his/her personal information. 
+
+11. Ride owner can only change his/her passenger number if someone has joined his ride.
+Notes: Disable other input fields if the ride has been joined by other users. He/She can alternatively cancel the ride if he/she wants to change other information. In that cases, all the ride sharer will force to quit. 
+
+12. Emails are required to be sent to the ride owner and all sharers when driver confirms a open ride. 
+Notes: The email system was implemented by using the send_mail in django to send the email to driver, ride owner and all ride sharers joining the ride once the driver confirmed the order. 
+
+13. Sharer can only view the searching results based on his/her inputs. 
+Notes: We found ourselves stuck in getting the correct results. Ultimately, we implemented this step by filtering the data in stages. 

@@ -1,0 +1,52 @@
+{% extends "rides/root.html" %}
+{% block content %}   
+<div class="container" align="center">
+    <div class="card" style="width: 70%;">  
+        <div class = "card-heading">
+            <h3 class = "card-title" align = "center">Driver Registration Form</h3>
+        </div>
+        <div class = "card-body">
+            <form method = "post" novalidate>
+              {% csrf_token %}
+              <div class="row padboth15" align="left">
+                <div class="col" align="left">
+                    <label>{{form.phone_num.label}}</label>
+                    {{form.phone_num}}
+                    <span style = "color:red;">{{form.phone_num.errors.0}}</span>
+                </div>
+                <div class="col" align="left">
+                    <label>{{form.car_type.label}}</label>
+                    {{form.car_type}}  
+                    <span style = "color:red;">{{form.car_type.errors.0}}</span>
+                </div>
+            </div>
+            <div class="row padboth15" align="left">
+                <div class="col" align="left">
+                    <label>{{form.license_number.label}}</label>
+                    {{form.license_number}}
+                    <span style = "color:red;">{{form.license_number.errors.0}}</span>
+                </div>
+                <div class="col" align="left">
+                    <label>{{form.max_capacity.label}}</label>
+                    {{form.max_capacity}}  
+                    <span style = "color:red;">{{form.max_capacity.errors.0}}</span>
+                </div>
+            </div>
+            <div class="padboth15" align="left">
+                <label>{{form.special_info.label}}</label>
+                {{form.special_info}}
+                <span style = "color:red;">{{form.special_info.errors.0}}</span>
+            </div>
+              <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                    <button type="submit " align="center"   class="padboth15 btn btn-success col-8">Submit</button>
+                </div>
+                <div class="col" align="center">
+                    <input type="button" align="center"  class="padboth15 btn btn-danger flex-auto text-center mx-3 mx-md-0 col-8" id = "home_button" value = "Cancel" onclick="gohomepage()";>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

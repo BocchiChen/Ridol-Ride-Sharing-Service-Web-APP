@@ -1,0 +1,83 @@
+{% extends "rides/root.html" %}
+{% block content %}      
+
+<div class="container" align = "center">        
+  <div class="card padboth10"  align="center" style="width: 85%;">  
+          <div class = "card-heading">
+            <h3 class = "card-title" align = "center">User Registration Form</h3>
+          </div>
+          <div class = "card-body">
+            <form method = "post" novalidate>
+              {% csrf_token %}
+              <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                  <label>{{form.username.label}}</label>
+                  {{form.username}}
+                  <span style = "color:red;">{{form.username.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                  <label>{{form.email.label}}</label>
+                  {{form.email}}  
+                  <span style = "color:red;">{{form.email.errors.0}}</span>
+                </div>
+              </div>
+              <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                  <label>{{form.first_name.label}}</label>
+                {{form.first_name}}
+                <span style = "color:red;">{{form.first_name.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                  <label>{{form.last_name.label}}</label>
+                {{form.last_name}}
+                <span style = "color:red;">{{form.last_name.errors.0}}</span>
+                </div>
+                <div class="col center" align="center">
+                  <label>{{form.gender.label}}</label>
+                {{form.gender}}
+                <span style = "color:red;">{{form.gender.errors.0}}</span>
+                </div>
+              </div>
+              <div class="row padboth15" align="left">
+                <label>{{form.address.label}}</label>
+                {{form.address}}
+                <span style = "color:red;">{{form.address.errors.0}}</span>
+              </div>  
+              <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                  <label>{{form.city.label}}</label>
+                {{form.city}}
+                <span style = "color:red;">{{form.city.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                  <label>{{form.state.label}}</label>
+                {{form.state}}
+                <span style = "color:red;">{{form.state.errors.0}}</span>
+                </div>
+                <div class="col center" align="center">
+                  <label>{{form.czip.label}}</label>
+                {{form.czip}}
+                <span style = "color:red;">{{form.czip.errors.0}}</span>
+                </div>
+              </div>
+              <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                  <label>{{form.password1.label}}</label>
+                  {{form.password1}}
+                  <span style = "color:red;">{{form.password1.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                  <label>{{form.password2.label}}</label>
+                  {{form.password2}}  
+                  <span style = "color:red;">{{form.password2.errors.0}}</span>
+                </div>
+              </div>
+              <div class="padboth15 center" >                   
+                <button type="submit" style = "float:left;"   class="btn btn-success col-4">Submit</button>
+                <input type="button"  style = "float:right;" class="btn btn-danger flex-auto text-center mx-3 mx-md-0 col-4" id = "home_button" value = "Cancel" onclick="gohomepage()";>
+              </div> 
+             </form>
+          </div>
+        </div>
+      </div>
+{% endblock content %}  

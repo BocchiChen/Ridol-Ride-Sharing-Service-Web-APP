@@ -1,0 +1,97 @@
+
+{% extends 'rides/root.html'%}
+
+{% block content%}
+    <div class="container pad30" align = "left" >            
+        <div class="padboth10" align="center" >
+            <div align="left" >              
+                <button class="btn btn-primary" data-bs-toggle="collapse" href="#confirmride" ><i class="bi bi-car-front-fill"></i> View Owned Rides History</button>       
+                <div class="pad15 show" id="confirmride"style="width: 100%;"> 
+                    <table class="table">
+                        <thead>
+                          <tr align="center">
+                            <th scope="col">Owner</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Arrival Date</th>
+                            <th scope="col">Arrival Time</th>
+                            <th scope="col">Passenger Num</th>                          
+                            <th scope="col">Driver Username</th> 
+                            <th scope="col">License Number</th> 
+                            <th scope="col">Vehicle Type</th>    
+                            <th scope="col">Share</th>                     
+                            <th scope="col">Status</th>    
+                            <th scope="col">Spec. Request</th>  
+                            <th scope="col">Details</th>                    
+                          </tr>                                                 
+                        </thead>
+                        <tbody>          
+                          {% for obj in order_list %}
+                          <tr align="center">
+                            <td>{{ obj.rider.username}}</td>
+                            <td>{{ obj.destination}}</td>
+                            <td>{{ obj.arrival_date }}</td>
+                            <td>{{ obj.arrival_time }}</td>
+                            <td><a href="{% url 'RenderPassengersInfo' obj.id %}?next={{ request.path|urlencode }}">{{ obj.tol_passenger_num }}</a></td>
+                            <td>{{ obj.driver.driver.username }}</td>
+                            <td>{{ obj.driver.license_number }}</td>
+                            <td>{{ obj.driver.car_type }}</td>
+                            <td>{{ obj.shared }}</td>
+                            <td>{{ obj.status }}</td>
+                            <td>{{ obj.special_reqs }}</td> 
+                            <td><a class="btn btn-outline-info" href="{% url 'OrderDetail' obj.id  %}?next={{ request.path|urlencode }}">Detail</a>              
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>  
+            </div>  
+        </div>                        
+    </div>     
+
+</div> 
+<div class="container pad30" align = "left">            
+  <div class="padboth10" align="center" >
+      <div align="left" >              
+          <button class="btn btn-secondary" data-bs-toggle="collapse" href="#sharehistory" ><i class="bi bi-car-front-fill"></i> View Shared Order History</button>       
+          <div class="pad15 show" id="sharehistory"style="width: 100%;"> 
+              <table class="table">
+                  <thead>
+                      <tr align="center">
+                        <th scope="col">Owner</th> 
+                        <th scope="col">Destination</th>
+                        <th scope="col">Arrival Date</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Passenger Num</th>                                                  
+                        <th scope="col">Driver Username</th> 
+                        <th scope="col">Vehicle Type</th> 
+                        <th scope="col">Share</th>  
+                        <th scope="col">Status</th>                         
+                        <th scope="col">Spec. Request</th>   
+                        <th scope="col">Details</th>                     
+                      </tr>
+                    </thead>
+                    <tbody>         
+                        {% for obj1 in share_rideowner_order %}
+                        <tr align="center">
+                          <td>{{ obj1.rider.username}}</td>
+                          <td>{{ obj1.destination}}</td>
+                          <td>{{ obj1.arrival_date }}</td>
+                          <td>{{ obj1.arrival_time }}</td>                       
+                          <td><a href="{% url 'RenderPassengersInfo' obj1.id %}?next={{ request.path|urlencode }}">{{ obj1.tol_passenger_num }}</a></td>                         
+                          <td>{{ obj1.driver.driver.username }}</td>
+                          <td>{{ obj1.driver.car_type }}</td>
+                          <td>{{ obj1.shared }}</td>
+                          <td>{{ obj1.status }}</td>
+                          <td>{{ obj1.special_reqs }}</td>     
+                          <td><a class="btn btn-outline-info" href="{% url 'OrderDetail' obj1.id  %}?next={{ request.path|urlencode }}">Detail</a>               
+                        </tr>            
+                    {% endfor %}
+                  </tbody>
+                </table>
+          </div>  
+      </div>  
+  </div>                        
+</div>     
+
+</div> 
+{%endblock%}

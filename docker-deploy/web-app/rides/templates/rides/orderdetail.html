@@ -1,0 +1,71 @@
+{% extends 'rides/root.html'%}
+
+{% block content%}
+    <div class="container pad30" align = "left">            
+        <div class="padboth10" align="center" >
+            <div align="left" >         
+              <div align="left" >              
+                <button class="btn btn-primary" data-bs-toggle="collapse" href="#orderdetail"  ><i class="bi bi-calendar-event-fill"></i> View Order Detail</button>       
+                <div class="pad15 show" id="orderdetail">       
+                  
+                  <div class = "card-body pad30" align = "center"></div>
+                  <div class="pad15 show" id="confirmride"style="width: 100%;"> 
+                    <table class="table">
+                        <thead>
+                          <tr align="center">
+                            <th scope="col">Owner</th>
+                            <th scope="col">Sharer</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Arrival Date</th>
+                            <th scope="col">Arrival Time</th>
+                            <th scope="col">Passenger Num</th>   
+                            <th scope="col">Status</th> 
+                            <th scope="col">Share</th>                        
+                            <th scope="col">Driver</th> 
+                            <th scope="col">Driver Phone Num.</th> 
+                            <th scope="col">Vehicle Type</th>  
+                            <th scope="col">License Number</th>
+                            <th scope="col">Maximum Vehicle Capacity</th>
+                            <th scope="col">Special Request</th>                     
+                          </tr>                                                 
+                        </thead>
+                        <tbody>          
+                          <tr align="center">
+                            <td>{{owner_order.rider.username}}({{owner_order.tol_passengers}})</td>
+                            <td>{%for obj in shared_order %}
+                                {{obj.sharer.username}}({{ obj.sha_tol_passengers }})
+                                {%endfor%}
+                            </td>
+                            <td>{{ owner_order.destination }}</td>
+                            <td>{{ owner_order.arrival_date }}</td>
+                            <td>{{ owner_order.arrival_time }}</td>
+                            <td> {{ owner_order.tol_passenger_num }}</td>
+                            <td>{{ owner_order.status }}</td>
+                            <td>{{ owner_order.shared }}</td>
+                            <td>{{ owner_order.driver.driver.username}}</td>
+                            <td>{{ owner_order.driver.phone_num}}</td>
+                            {% if owner_order.driver is None %}
+                              <td>{{ owner_order.vehicle_type}}</td>
+                            {% else %}
+                              <td>{{ owner_order.driver.car_type}}</td>
+                            {% endif %}
+                            <td>{{ owner_order.driver.license_number }}</td>
+                            <td>{{ owner_order.driver.max_capacity }}</td> 
+                            <td>{{ owner_order.special_reqs }}</td>                
+                          </tr>                    
+                        </tbody>
+                      </table>
+                </div>  
+            </div>  
+        </div>   
+        <div align="right" >  
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-arrow-return-left"></i> Go Back</button>
+            </form>                          
+      </div>     
+
+</div> 
+</div> 
+{%endblock%}

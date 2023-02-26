@@ -1,0 +1,49 @@
+{% extends 'rides/root.html'%}
+
+{% block content%}
+    <div class="container pad30" align = "left">            
+        <div class="padboth10" align="center" >
+            <div align="left" >              
+                <button class="btn btn-primary" data-bs-toggle="collapse" href="{% url 'Home' %}" ><i class="bi bi-car-front-fill"></i> View Search Results</button>       
+                <div class="pad15 show" id="confirmride"style="width: 100%;"> 
+                    <table class="table">
+                        <thead>
+                          <tr align="center">
+                            <th scope="col">Ride Owner Username</th> 
+                            <th scope="col">Destination</th>
+                            <th scope="col">Arrival Date</th>
+                            <th scope="col">Arrival Time</th>
+                            <th scope="col">Passenger Num</th>                          
+                            <th scope="col">Vehicle Type</th>                         
+                            <th scope="col">Status</th>    
+                            <th scope="col">Others</th>   
+                            <th scope="col">Join Ride</th>                 
+                          </tr>                                                 
+                        </thead>
+                        <tbody>          
+                          {% for obj in order_list %}
+                          <tr align="center">
+                            <td>{{ obj.rider.username}}</td>
+                            <td>{{ obj.destination}}</td>
+                            <td>{{ obj.arrival_date }}</td>
+                            <td>{{ obj.arrival_time }}</td>
+                            <td><a href="{% url 'RenderPassengersInfo' obj.id %}？next={{ request.path|urlencode }}">{{ obj.tol_passenger_num }}</a></td>
+                            <td>{{ obj.vehicle_type }}</td>
+                            <td>{{ obj.status }}</td>
+                            <td>{{ obj.special_reqs }}</td>     
+                            <td><a class="btn btn-outline-danger" href="{% url 'SharerJoinAOrder' obj.id a1 a2 a3 a4 a5 a6%}">Join</a>             
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>  
+            </div>  
+        </div>                        
+    </div>  
+    <div align="right" >  
+            <form method="GET">
+                <input type="hidden" name="next" value="{% url 'RideHome' %}">
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-arrow-return-left"></i> Go Back</button>
+            </form>             
+    </div>     
+{%endblock%}

@@ -1,0 +1,84 @@
+{% extends "rides/root.html" %}
+{% block content %}     
+<div class="container" align = "center">        
+  <div class="card "  align="center" style="width: 70%;">  
+    <div class = "card-heading">
+      <h3 class = "card-title" align = "center">Order Information</h3>
+    </div>
+    <div class = "card-body" align = "center">
+      <form method = "post" novalidate>
+        {% csrf_token %}
+        <div class="row padboth15" align="left">
+          <div class="col" align="center">
+            <label>{{form.destination.label}}</label>
+            {{form.destination}}
+            <span style = "color:red;">{{form.destination.errors.0}}</span>
+              {% if help_text %}
+                <p style = 'color:green;'> {{help_text|safe}} </p>
+              {% endif %}
+          </div>
+          <div class="col" align="center">
+            <label>{{form.tol_passengers.label}}</label>
+            {{form.tol_passengers}}  
+            <span style = "color:red;">{{form.tol_passengers.errors.0}}</span>
+              {% if help_text %}
+                <p style = 'color:green;'> {{help_text|safe}} </p>
+              {% endif %}
+          </div>
+        </div>
+        <div class="row padboth15" align="left">
+          <div class="col" align="center">
+            <label>{{form.arrival_date.label}}</label>
+          {{form.arrival_date}}
+          <span style = "color:red;">{{form.arrival_date.errors.0}}</span>
+              {% if help_text %}
+                <p style = 'color:green;'> {{help_text|safe}} </p>
+              {% endif %}
+          </div>
+          <div class="col" align="center">
+            <label>{{form.arrival_time.label}}</label>
+          {{form.arrival_time}}
+          <span style = "color:red;">{{form.arrival_time.errors.0}}</span>
+              {% if help_text %}
+                <p style = 'color:green;'> {{help_text|safe}} </p>
+              {% endif %}
+          </div>
+
+          <div class="col center" align="center">
+            <label>{{form.shared.label}}</label>
+          {{form.shared}}
+          <span style = "color:red;">{{form.shared.errors.0}}</span>
+          {% if help_text %}
+            <p style = 'color:green;'> {{help_text|safe}} </p>
+          {% endif %}
+          </div>
+        </div>
+        <div class="row padboth15" align="left">
+          <label>{{form.vehicle_type.label}}</label>
+          {{form.vehicle_type}}
+          <span style = "color:red;">{{form.vehicle_type.errors.0}}</span>
+              {% if help_text %}
+                <p style = 'color:green;'> {{help_text|safe}} </p>
+              {% endif %}
+        </div>
+        <div class="row padboth15" align="left">
+          <label>{{form.special_reqs.label}}</label>
+          {{form.special_reqs}}
+          <span style = "color:red;">{{form.special_reqs.errors.0}}</span>
+              {% if help_text %}
+                <p style = 'color:green;'> {{help_text|safe}} </p>
+              {% endif %}
+        </div>
+        <div class="row padboth15" align="left">
+          <div class="col" align="center">
+            <button type="submit" align="center"   class="btn btn-success col-8">Submit</button>
+        </div>
+          <div class="col" align="center">
+            <input type="button"  align="center" class="btn btn-danger flex-auto text-center col-8" id = "home_button" value = "Cancel" onclick="gohomepage()";>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>  
+{% endblock content %}

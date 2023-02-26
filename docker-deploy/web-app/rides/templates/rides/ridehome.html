@@ -1,0 +1,164 @@
+{% extends 'rides/root.html'%}
+  {% block content%}
+    <div class = "pad30 container">
+      <div class="row center" align = "center">
+        <div class="col">
+        <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#startride" aria-expanded="false" aria-controls="startride">
+        Make a Ridol Ride
+        </button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#searchshareride" aria-expanded="false" aria-controls="searchshareride">
+          Search a Ridol Shared Ride
+        </button>
+      </div>
+      <div class = "col">
+        <button type="button"   class="btn btn-outline-primary" value = "godrivemode" onclick=godrivemode();>Driver Mode</button>
+      </div>
+    </div>
+    <form method="POST" novalidate>
+      {% csrf_token %}
+        <div class="accordion accordion-flush" id="accordionFlushExample"align = "center">
+          <div class="accordion-item ">
+            <h2 class="accordion-header" id="startridehead">           
+            </h2>
+            <div id="startride" class="accordion-itemaccordion-collapse {{collapse1}}" aria-labelledby="startridehead" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body ">
+                <h5 align = "left">Ride Owner Start a Ride</h5>   
+                <div class="card padboth10"  align="center">                              
+                    <div class="row padboth10" align="left">
+                    <label>{{form1.destination.label}}</label>
+                    {{form1.destination}}
+                    <p style = "color:red;">{{form1.destination.errors.0}}</p>
+                    </div>                              
+                    <div class="row padboth10" align="left">
+                      <div class="col" align="center">
+                        <label>{{form1.arrival_date.label}}</label>
+                        {{form1.arrival_date}}
+                        <p style = "color:red;">{{form1.arrival_date.errors.0}}</p>
+                        {% if help_text %}
+                        <p style = 'color:green;'> {{help_text|safe}} </p>
+                        {% endif %}
+                      </div>
+                      <div class="col" align="center">
+                        <label>{{form1.arrival_time.label}}</label>
+                        {{form1.arrival_time}}  
+                        <p style = "color:red;">{{form1.arrival_time.errors.0}}</p>
+                        {% if help_text %}
+                        <p style = 'color:green;'> {{help_text|safe}} </p>
+                        {% endif %}
+                      </div>
+                      <div class="col" align="center">
+                        <label>{{form1.shared.label}}</label>
+                      {{form1.shared}}
+                      <p style = "color:red;">{{form1.shared.errors.0}}</p>
+                      {% if help_text %}
+                      <p style = 'color:green;'> {{help_text|safe}} </p>
+                      {% endif %}
+                      </div>
+                    </div>
+                    <div class="row padboth10" align="left">
+                      <div class="col">
+                        <label>{{form1.vehicle_type.label}}</label>
+                        {{form1.vehicle_type}}
+                        <p style = "color:red;">{{form1.vehicle_type.errors.0}}</p>
+                        {% if help_text %}
+                        <p style = 'color:green;'> {{help_text|safe}} </p>
+                        {% endif %}
+                      </div>
+                      <div class="col ">
+                        <label>{{form1.tol_passengers.label}}</label>
+                        {{form1.tol_passengers}}
+                        <p style = "color:red;">{{form1.tol_passengers.errors.0}}</p>
+                        {% if help_text %}
+                        <p style = 'color:green;'> {{help_text|safe}} </p>
+                        {% endif %}
+                      </div>
+                    </div>                                 
+                    <div class="padboth10" align="left">
+                      <label>{{form1.special_reqs.label}}</label>
+                      {{form1.special_reqs}}
+                      <p style = "color:red;">{{form1.special_reqs.errors.0}}</p>
+                      {% if help_text %}
+                      <p style = 'color:green;'> {{help_text|safe}} </p>
+                      {% endif %}
+                    </div>             
+                    <div class="padboth10 center" >                   
+                        <button type="submit" class="btn btn-outline-primary" name = "startridebutton" >Start Request</button>
+                    </div>                      
+                </div> 
+              
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item ">
+            <h2 class="accordion-header" id="searchshareridehead">           
+            </h2>
+            <div id="searchshareride" class="accordion-collapse {{collapse2}}" aria-labelledby="searchshareridehead" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <h5 align = "left">Ride Share Search Form</h5>   
+                <div class="card padboth10"  align="center">                      
+                  <div class="row padboth10" align="left">
+                    <label>{{form2.sha_destination.label}}</label>
+                    {{form2.sha_destination}}
+                    <p style = "color:red;">{{form2.sha_destination.errors.0}}</p>
+                  </div>                              
+                  <div class="row padboth10" align="left">
+                    <div class="col" align="center">
+                      <label>{{form2.earliest_arrival_date.label}}</label>
+                      {{form2.earliest_arrival_date}}
+                      <p style = "color:red;">{{form2.earliest_arrival_date.errors.0}}</p>
+                      {% if help_text %}
+                      <p style = 'color:green;'> {{help_text|safe}} </p>
+                      {% endif %}
+                    </div>
+                    <div class="col" align="center">
+                      <label>{{form2.earliest_arrival_time.label}}</label>
+                      {{form2.earliest_arrival_time}}
+                      <p style = "color:red;">{{form2.earliest_arrival_time.errors.0}}</p>
+                      {% if help_text %}
+                      <p style = 'color:green;'> {{help_text|safe}} </p>
+                      {% endif %}
+                    </div>
+                    
+                  </div>
+                  <div class="row padboth10" align="left">           
+                    <div class="col" align="center">
+                      <label>{{form2.latest_arrival_date.label}}</label>
+                      {{form2.latest_arrival_date}}  
+                      <p style = "color:red;">{{form2.latest_arrival_date.errors.0}}</p>
+                      {% if help_text %}
+                      <p style = 'color:green;'> {{help_text|safe}} </p>
+                      {% endif %}
+                      </div>
+                  <div class="col" align="center">
+                      <label>{{form2.latest_arrival_time.label}}</label>
+                      {{form2.latest_arrival_time}}
+                      <p style = "color:red;">{{form2.latest_arrival_time.errors.0}}</p>
+                      {% if help_text %}
+                      <p style = 'color:green;'> {{help_text|safe}} </p>
+                      {% endif %}
+                    </div>
+                  </div>                                
+                  <div class="row padboth10" align="left">
+                    <div class="col" align="center">
+                    <label>{{form2.sha_tol_passengers.label}}</label>
+                    {{form2.sha_tol_passengers}}
+                    <p style = "color:red;">{{form2.sha_tol_passengers.errors.0}}</p>
+                    {% if help_text %}
+                    <p style = 'color:green;'> {{help_text|safe}} </p>
+                    {% endif %}
+                  </div>             
+                  <div class="col center" align="center">                   
+                      <button type="submit" class="btn btn-outline-primary" name = "searchsharebutton" >Search Rides</button>
+                  </div>  
+                </div>                    
+                </div>             
+              </div>
+            </div>
+          </div>
+        </div>                         
+      </div>  
+    </form>                            
+  </div> 
+{%endblock%}

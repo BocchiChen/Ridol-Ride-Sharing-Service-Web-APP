@@ -1,0 +1,75 @@
+.navbar-brand{
+    font-weight: bold;
+  }
+  .form-group{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .card{
+    margin-top: 20px;
+  }
+  .card-title{
+    margin-top: 30px;
+  }
+  
+  .pad30{
+    padding: 30px 30px;
+  }
+  
+  .box {
+    border: 1px solid rgb(228,228,228);
+    padding: 10px 20px;
+    background-color: rgb(250,250,250);
+  }
+  
+  #register_button{
+    margin-right: 20px;
+  }
+  
+  #reg_button{
+    margin-right: 20px;
+  }
+  #login_button{
+    margin-right: 50px;
+  }
+
+  .homebox{
+    width: 90%;
+    height:600px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgb(250,250,250);
+    border: 1px solid rgb(228,228,228);
+    text-align: left;
+    
+   }
+.top20px{
+   margin-top: 30px;
+}
+.top5{
+   margin-top: 5%;
+}
+.pad15{
+   padding: 0px 15px;
+}
+.padlr30{
+  padding: 0px 30px;
+}
+.pad10{
+   padding: 10px 0px;
+}
+.padboth15{
+  padding: 15px 15px;
+}
+.padboth10{
+  padding: 10px 10px;
+}
+.padboth20{
+  padding: 20px 20px;
+}s
+
+.center{
+  align-self: center;
+}
+

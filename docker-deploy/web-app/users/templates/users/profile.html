@@ -1,0 +1,92 @@
+{% extends "rides/root.html" %}
+{% block content %}      
+<div class="container" align = "center">        
+    <div class="card padboth10"  align="center" style="width: 70%;">  
+        <div class = "card-heading">
+            <h3 class = "card-title" align = "center">User Information</h3>
+        </div>
+        <div class = "card-body">
+            <form method = "post" novalidate>
+            {% csrf_token %}
+            <div class="padboth15" align="left">
+                <label>{{form.user_form.email.label}}</label>
+                {{form.user_form.email}}
+                <span style = "color:red;">{{form.user_form.email.errors.0}}</span>
+            </div>
+            <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                    <label>{{form.user_form.first_name.label}}</label>
+                    {{form.user_form.first_name}}
+                    <span style = "color:red;">{{form.user_form.first_name.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                    <label>{{form.user_form.last_name.label}}</label>
+                    {{form.user_form.last_name}}  
+                    <span style = "color:red;">{{form.user_form.last_name.errors.0}}</span>
+                </div>
+                <div class="col center" align="center">
+                    <label>{{form.user_form.gender.label}}</label>
+                    {{form.user_form.gender}}  
+                    <span style = "color:red;">{{form.user_form.gender.errors.0}}</span>
+                </div>
+                </div>
+                <div class="row padboth15" align="left">
+                <label>{{form.user_form.address.label}}</label>
+                {{form.user_form.address}}
+                <span style = "color:red;">{{form.user_form.address.errors.0}}</span>
+                </div>  
+                <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                    <label>{{form.user_form.city.label}}</label>
+                {{form.user_form.city}}
+                <span style = "color:red;">{{form.user_form.city.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                    <label>{{form.user_form.state.label}}</label>
+                {{form.user_form.state}}
+                <span style = "color:red;">{{form.user_form.state.errors.0}}</span>
+                </div>
+                <div class="col center" align="center">
+                    <label>{{form.user_form.czip.label}}</label>
+                {{form.user_form.czip}}
+                <span style = "color:red;">{{form.user_form.czip.errors.0}}</span>
+                </div>
+                </div>
+                <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                    <label>{{form.driver_form.phone_num.label}}</label>
+                    {{form.driver_form.phone_num}}
+                    <span style = "color:red;">{{form.driver_form.phone_num.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                    <label>{{form.driver_form.car_type.label}}</label>
+                    {{form.driver_form.car_type}}  
+                    <span style = "color:red;">{{form.driver_form.car_type.errors.0}}</span>
+                </div>
+            </div>
+            <div class="row padboth15" align="left">
+                <div class="col" align="center">
+                    <label>{{form.driver_form.license_number.label}}</label>
+                    {{form.driver_form.license_number}}
+                    <span style = "color:red;">{{form.driver_form.license_number.errors.0}}</span>
+                </div>
+                <div class="col" align="center">
+                    <label>{{form.driver_form.max_capacity.label}}</label>
+                    {{form.driver_form.max_capacity}}  
+                    <span style = "color:red;">{{form.driver_form.max_capacity.errors.0}}</span>
+                </div>
+            </div>
+            <div class="padboth15" align="left">
+                <label>{{form.driver_form.special_info.label}}</label>
+                {{form.driver_form.special_info}}
+                <span style = "color:red;">{{form.driver_form.special_info.errors.0}}</span>
+            </div>
+            <div class="padboth15" align="left">
+                <button type="submit" style = "float:left;"   class="btn btn-success col-4">Update</button>
+                <input type="button"  style = "float:right;" class="btn btn-danger flex-auto text-center mx-3 mx-md-0 col-4" id = "home_button" value = "Cancel" onclick="gohomepage()";>
+            </div> 
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
