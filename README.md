@@ -1,0 +1,2 @@
+# Ridol-Ride-Sharing-Service-Web-APP
+The software solution that I have come up with is a ride-sharing web app that is designed help users act as a ride owner to create ride orders and keep track of their orders for reaching their destinations; act as a driver to pick up ride orders, search any available ride orders and confirm or finish the ride orders; act as a ride sharer to search any shared ride and join the shared ride. 
